@@ -1,0 +1,104 @@
+﻿@{
+    ViewData["Title"] = "Student Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    // Values passed from controller
+    var prefillEmail = ViewBag.Email as string;
+    var prefillPassword = ViewBag.Password as string;
+
+    // Remember Me values from cookie
+    var rememberEmail = ViewBag.RememberEmail as string;
+    bool isRemembered = ViewBag.IsRemembered == true;
+}
+
+<div style="display:flex; justify-content:center; align-items:center; height:90vh; background-color:#f7f9fc;">
+    <div style="background-color:white; border-radius:10px; box-shadow:0 4px 15px rgba(0,0,0,0.1); width:550px; padding:30px;">
+        <h3 style="text-align:center; color:#002b5c; margin-bottom:25px;">Student Login</h3>
+
+        <!-- Success message -->
+        @if (TempData["Success"] != null)
+        {
+            <div style="background-color:#d4edda; color:#155724; padding:10px; border-radius:5px; text-align:center; margin-bottom:15px;">
+                @TempData["Success"]
+            </div>
+        }
+
+        <!-- Error message -->
+        @if (ViewBag.ErrorMessage != null)
+        {
+            <div style="background-color:#f8d7da; color:#721c24; padding:10px; border-radius:5px; text-align:center; margin-bottom:15px;">
+                @ViewBag.ErrorMessage
+            </div>
+        }
+
+        <!-- Login Form -->
+        <form asp-action="Login" method="post">
+
+            <!-- Email field -->
+            <div style="margin-bottom:15px;">
+                <label style="font-weight:600;">Email</label>
+                <input type="email"
+                       name="Email"
+                       placeholder="Enter your email"
+                       value="@(rememberEmail ?? prefillEmail)"
+                       style="width:100%; padding:10px; margin-top:5px; border:1px solid #ccc; border-radius:5px;"
+                       required />
+            </div>
+
+            <!-- Password field -->
+            <div style="margin-bottom:20px;">
+                <label style="font-weight:600;">Password / Temporary Password (OTP)</label>
+
+                <div style="position:relative;">
+                    <input type="password"
+                           id="Password"
+                           name="Password"
+                           placeholder="Enter your password"
+                           value="@prefillPassword"
+                           style="width:100%; padding:10px; padding-right:40px; margin-top:5px; border:1px solid #ccc; border-radius:5px;"
+                           required />
+
+                    <!-- Eye Icon -->
+                    <span onclick="togglePassword()"
+                          style="position:absolute; right:10px; top:50%; transform:translateY(-50%); cursor:pointer; font-size:18px; color:#555;">
+                        👁
+                    </span>
+                </div>
+            </div>
+
+            <!-- Forgot Password -->
+            <a href="/Account/ForgotPassword" style="display:block; margin-bottom:15px; color:#0056a3; font-size:14px;">
+                Forgot Password?
+            </a>
+
+            <!-- Remember Me -->
+            <div style="margin-bottom:20px;">
+                <label>
+                    <input type="checkbox"
+                           name="RememberMe"
+                           @(isRemembered ? "checked" : "") />
+                    Remember Me
+                </label>
+            </div>
+
+            <button type="submit"
+                    style="width:100%; background-color:#002b5c; color:white; border:none; padding:10px; border-radius:5px; font-weight:bold; cursor:pointer;">
+                Login
+            </button>
+        </form>
+    </div>
+</div>
+
+<!-- JavaScript -->
+<script>
+    function togglePassword() {
+        var pwd = document.getElementById("Password");
+        pwd.type = pwd.type === "password" ? "text" : "password";
+    }
+
+    // Auto hide success alert
+    setTimeout(() => {
+        const alertBox = document.querySelector('div[style*="#d4edda"]');
+        if (alertBox) alertBox.style.display = 'none';
+    }, 3000);
+</script>

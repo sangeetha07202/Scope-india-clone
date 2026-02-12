@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SCOPE INDIA</title>
+
+    <!-- NO EXTERNAL CSS FILE -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+
+</head>
+
+<body style="margin:0; padding:0; background:#ffffff;">
+
+    <!-- 🔵 HEADER TOP SECTION -->
+    <header style="background-color:#0b0b3d; width:100%; padding:20px 0; position:relative;">
+
+        <!-- Logo (Left) -->
+        <img src="~/images/scopeindia-logo.png"
+             style="width:170px; position:absolute; left:40px; top:20px;" />
+
+        <!-- Google Rating (Right) -->
+        <img src="~/images/google-rating-scope-india.png"
+             style="width:170px; position:absolute; right:40px; top:20px;" />
+
+        <!-- Floating Right Icons -->
+        <div style="position:absolute; right:40px; top:110px; display:flex; flex-direction:column; gap:10px;">
+            <a href="#" style="background:#ff9900; color:#fff; width:45px; height:45px; display:flex; justify-content:center; align-items:center; border-radius:8px;">
+                <i class="bi bi-image" style="font-size:22px;"></i>
+            </a>
+            <a href="#" style="background:#E4405F; color:#fff; width:45px; height:45px; display:flex; justify-content:center; align-items:center; border-radius:8px;">
+                <i class="bi bi-instagram" style="font-size:22px;"></i>
+            </a>
+            <a href="#" style="background:#007bff; color:#fff; width:45px; height:45px; display:flex; justify-content:center; align-items:center; border-radius:8px;">
+                <i class="bi bi-telephone" style="font-size:22px;"></i>
+            </a>
+            <a href="#" style="background:#25D366; color:#fff; width:45px; height:45px; display:flex; justify-content:center; align-items:center; border-radius:8px;">
+                <i class="bi bi-whatsapp" style="font-size:22px;"></i>
+            </a>
+        </div>
+
+        <!-- Navigation Menu -->
+        <nav style="margin-top:180px; display:flex; justify-content:center; gap:35px; font-size:17px; font-weight:bold;">
+            <a style="color:white; text-decoration:none;" asp-controller="Home" asp-action="Index">Home</a>
+            <a style="color:white; text-decoration:none;" asp-controller="Home" asp-action="About">About Us</a>
+            <a style="color:white; text-decoration:none;" asp-controller="Home" asp-action="Contact">Contact</a>
+            <a style="color:white; text-decoration:none;" asp-controller="Student" asp-action="Register">Registration</a>
+            <a style="color:white; text-decoration:none;" asp-controller="Student" asp-action="Login">Login</a>
+            <a style="color:white; text-decoration:none;" asp-controller="Student" asp-action="Dashboard">Dashboard</a>
+            <a style="color:white; text-decoration:none;" asp-controller="Student" asp-action="SelectCourses">Courses</a>
+        </nav>
+
+    </header>
+
+    <!-- PAGE CONTENT -->
+    <main style="width:100%; margin-top:20px;">
+        @RenderBody()
+    </main>
+
+    <!-- FOOTER -->
+    <footer style="background:#0b0b3d; color:white; text-align:center; padding:40px 20px; margin-top:40px;">
+        <p>We are located at Technopark TVM | Thampanoor TVM | Kochi | Nagercoil</p>
+
+        <p>
+            <a href="tel:‪+919745936073‬" style="color:#00bfff;">9745936073 (TPK)</a> |
+            <a href="tel:‪+919745936073‬" style="color:#00bfff;">9745936073 (TVM)</a> |
+            <a href="tel:‪+917592939481‬" style="color:#00bfff;">7592939481 (EKM)</a> |
+            <a href="tel:‪+918075536185‬" style="color:#00bfff;">8075536185 (NGL)</a>
+        </p>
+
+        <p style="color:#cccccc; font-size:13px; margin-top:15px;">
+            © 2007–2025 SCOPE INDIA & SUFFIX E SOLUTIONS PRIVATE LIMITED
+        </p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

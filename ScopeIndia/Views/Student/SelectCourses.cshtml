@@ -1,0 +1,113 @@
+﻿@model IEnumerable<ScopeIndia.Models.Scourse>
+
+@{
+    ViewData["Title"] = "Select Courses";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4 text-primary">🎓 Select Your Courses</h2>
+
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger">@ViewBag.Error</div>
+    }
+
+    <form asp-action="SelectCourses" method="post">
+        <div class="row">
+
+            @foreach (var course in Model)
+            {
+                bool isSelected = ViewBag.SelectedCourses != null &&
+                ((List<int>)ViewBag.SelectedCourses).Contains(course.Id);
+
+                <div class="col-md-6 mb-3">
+                    <div class="form-check shadow-sm p-3 rounded bg-white">
+
+                        <input class="form-check-input" type="checkbox"
+                               name="selectedCourses"
+                               value="@course.Id"
+                               id="course_@course.Id"
+                               @(isSelected ? "checked" : "") />
+
+                        <label class="form-check-label fw-bold" for="course_@course.Id">
+                            @course.CourseName
+                        </label>
+
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="text-center mt-4">
+            <button type="submit" class="btn btn-primary px-5">Save Courses</button>
+        </div>
+    </form>
+</div>
+
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    .form-check {
+        transition: all 0.2s ease;
+        border: 1px solid #e0e0e0;
+    }
+
+        .form-check:hover {
+            background-color: #eef7ff;
+        }
+
+    /* Make checkbox visible and larger */
+    .form-check-input {
+        width: 1.3rem;
+        height: 1.3rem;
+        cursor: pointer;
+    }
+
+        /* Blue tick when selected */
+        .form-check-input:checked {
+            background-color: #007bff !important;
+            border-color: #007bff !important;
+
+        }
+
+    
+    /* Fix checkbox being pushed to the right */
+    .form-check {
+        padding-left: 0 !important;
+        display: flex;
+        align-items: center;
+        gap: 10px; /* space between checkbox & text */
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 12px;
+    }
+
+    /* Reset Bootstrap absolute positioning */
+    .form-check-input {
+        position: static !important;
+        margin: 0 !important;
+        transform: scale(1.1); /* reduce size (1.0 is normal, 1.1 is small increase) */
+        cursor: pointer;
+    }
+
+    /* Fix spacing for text */
+    .form-check-label {
+        margin: 0 !important;
+        font-size: 15px;
+        cursor: pointer;
+
+    }
+</style>
+
+   
+
+
+
+
+
+
+
+
+

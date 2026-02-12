@@ -1,0 +1,225 @@
+﻿@model ScopeIndia.Models.Student
+@{
+    ViewData["Title"] = "Course Registration at SCOPE INDIA";
+}
+
+<!-- SweetAlert -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+@if (TempData["Success"] != null)
+{
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Registration Successful!',
+            html: '<b>You are registered successfully.</b><br>A one-time password has been sent to your Gmail.',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#002b64'
+        });
+    </script>
+}
+
+@if (ViewBag.ErrorMessage != null)
+{
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Registration Failed!',
+            text: '@ViewBag.ErrorMessage',
+            confirmButtonColor: '#002b64'
+        });
+    </script>
+}
+
+<!-- OUTER BACKGROUND -->
+<div style="font-family:'Segoe UI',sans-serif; background-color:#f0f2f5; padding:25px 0;">
+
+    <div style="
+        width:100%;
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+        padding:15px 0 5px 0;
+    ">
+        <h2 style="font-weight:800; margin:0; color:#002b64; text-align:center;">
+            Course Registration at SCOPE INDIA
+        </h2>
+
+        <p style="color:#333; font-size:15px; margin-top:6px; text-align:center;">
+            Center for Software, Networking & Cloud Education
+        </p>
+    </div>
+
+    <!-- MAIN CARD (reduced gap) -->
+    <div style="
+            max-width:950px;
+            background:white;
+            margin:25px auto;        /* ⬅ reduced gap */
+            padding:40px 35px;
+            border-radius:18px;
+            box-shadow:0 5px 20px rgba(0,0,0,0.18);
+            border-left:6px solid #002b64;
+        ">
+
+        <h3 style="font-weight:700;
+                   color:#002b64;
+                   margin-bottom:25px;
+                   padding-bottom:8px;
+                   border-bottom:2px solid #002b64;">
+            Student Registration Form
+        </h3>
+
+        <!-- FORM GRID -->
+        <form asp-controller="Student" asp-action="Register" method="post" enctype="multipart/form-data"
+              style="display:grid; grid-template-columns:repeat(2,1fr); gap:22px;">
+
+            <!-- FIRST NAME -->
+            <div>
+                <label style="font-weight:600;">First Name (required)</label>
+                <input asp-for="FirstName" placeholder="Enter first name" required
+                       style="padding:12px; border:1px solid #ccc; border-radius:8px; width:100%;" />
+            </div>
+
+            <!-- LAST NAME -->
+            <div>
+                <label style="font-weight:600;">Last Name (required)</label>
+                <input asp-for="LastName" placeholder="Enter last name" required
+                       style="padding:12px; border:1px solid #ccc; border-radius:8px; width:100%;" />
+            </div>
+
+            <!-- GENDER -->
+            <div>
+                <label style="font-weight:600;">Gender (required)</label><br />
+                <label><input type="radio" asp-for="Gender" value="Male" required /> Male</label>
+                <label style="margin-left:15px;"><input type="radio" asp-for="Gender" value="Female" /> Female</label>
+                <label style="margin-left:15px;"><input type="radio" asp-for="Gender" value="Other" /> Other</label>
+            </div>
+
+            <!-- DOB -->
+            <div>
+                <label style="font-weight:600;">Date of Birth (required)</label>
+                <input asp-for="DOB" type="date" required
+                       style="padding:12px; border:1px solid #ccc; border-radius:8px; width:100%;" />
+            </div>
+
+            <!-- EMAIL -->
+            <div>
+                <label style="font-weight:600;">Email (required)</label>
+                <input asp-for="Email" type="email" placeholder="example@gmail.com" required
+                       style="padding:12px; border:1px solid #ccc; border-radius:8px; width:100%;" />
+            </div>
+
+            <!-- PHONE -->
+            <div>
+                <label style="font-weight:600;">Phone Number (required)</label>
+                <input asp-for="PhoneNumber" type="text" placeholder="Enter phone number" required
+                       style="padding:12px; border:1px solid #ccc; border-radius:8px; width:100%;" />
+            </div>
+
+            <!-- COUNTRY -->
+            <div>
+                <label style="font-weight:600;">Country (required)</label>
+                <select asp-for="Country" id="country" required
+                        style="padding:12px; border-radius:8px; border:1px solid #ccc; width:100%;">
+                    <option value="">-- Select Country --</option>
+                    <option>India</option>
+                    <option>USA</option>
+                    <option>UK</option>
+                </select>
+            </div>
+
+            <!-- STATE -->
+            <div>
+                <label style="font-weight:600;">State (required)</label>
+                <select asp-for="State" id="state" required
+                        style="padding:12px; border-radius:8px; border:1px solid #ccc; width:100%;">
+                    <option value="">-- Select State --</option>
+                </select>
+            </div>
+
+            <!-- CITY -->
+            <div>
+                <label style="font-weight:600;">City (required)</label>
+                <select asp-for="City" id="city" required
+                        style="padding:12px; border-radius:8px; border:1px solid #ccc; width:100%;">
+                    <option value="">-- Select City --</option>
+                </select>
+            </div>
+
+            <!-- AVATAR UPLOAD -->
+            <div style="grid-column:1 / span 2;">
+                <label style="font-weight:600;">Upload Avatar</label>
+                <input type="file" name="Avatar"
+                       style="padding:12px; border-radius:8px; border:1px solid #ccc; width:100%;" />
+            </div>
+
+            <!-- AVATAR PREVIEW -->
+            <div style="grid-column:1 / span 2; text-align:center;">
+                <img id="avatarPreview" src="#" style="display:none; width:130px; height:130px; border-radius:50%; border:3px solid #002b64;">
+            </div>
+
+            <!-- HOBBIES -->
+            <div style="grid-column:1 / span 2;">
+                <label style="font-weight:700;">Hobbies</label><br />
+                <label><input type="checkbox" name="Hobbies" value="Reading" /> Reading</label>
+                <label style="margin-left:15px;"><input type="checkbox" name="Hobbies" value="Sports" /> Sports</label>
+                <label style="margin-left:15px;"><input type="checkbox" name="Hobbies" value="Music" /> Music</label>
+            </div>
+
+            <!-- SUBMIT BUTTON -->
+            <div style="grid-column:1 / span 2; text-align:center; margin-top:20px;">
+                <button type="submit"
+                        style="background:#002b64; color:#ffcc00;
+                               padding:14px 50px; border:none;
+                               font-weight:800; font-size:17px;
+                               border-radius:30px; cursor:pointer;
+                               box-shadow:0 4px 8px rgba(0,0,0,0.35);">
+                    Submit
+                </button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<!-- JS -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    // COUNTRY → STATE
+    $("#country").change(function () {
+        var country = $(this).val();
+        $("#state").html('<option value="">-- Select State --</option>');
+        $("#city").html('<option value="">-- Select City --</option>');
+
+        if (country) {
+            $.get("/Student/GetStates", { country: country }, function (data) {
+                $.each(data, function (i, s) {
+                    $("#state").append('<option>' + s + '</option>');
+                });
+            });
+        }
+    });
+
+    // STATE → CITY
+    $("#state").change(function () {
+        var state = $(this).val();
+        $("#city").html('<option value="">-- Select City --</option>');
+
+        if (state) {
+            $.get("/Student/GetCities", { state: state }, function (data) {
+                $.each(data, function (i, c) {
+                    $("#city").append('<option>' + c + '</option>');
+                });
+            });
+        }
+    });
+
+    // AVATAR PREVIEW
+    document.querySelector('input[name="Avatar"]').addEventListener('change', function (event) {
+        document.getElementById('avatarPreview').src =
+            URL.createObjectURL(event.target.files[0]);
+        document.getElementById('avatarPreview').style.display = 'inline';
+    });
+</script>

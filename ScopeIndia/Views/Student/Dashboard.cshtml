@@ -1,0 +1,252 @@
+﻿@model ScopeIndia.Models.Student
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<!-- SweetAlert -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+@if (TempData["Success"] != null)
+{
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Success!',
+            text: '@TempData["Success"]',
+            confirmButtonColor: '#3085d6'
+        });
+    </script>
+}
+@if (TempData["Error"] != null)
+{
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Error!',
+            text: '@TempData["Error"]',
+            confirmButtonColor: '#d33'
+        });
+    </script>
+}
+
+<!-- MAIN WRAPPER -->
+<div style="width:100%; display:flex; justify-content:center; padding:40px 0; background:#f2f4f8;">
+
+    <div style="width:90%; max-width:1150px;">
+
+        <!-- TOP PROFILE BANNER -->
+        <div style="
+            background: linear-gradient(135deg, #002b64 0%, #01408a 100%);
+            border-radius:18px;
+            padding:40px 25px;
+            text-align:center;
+            color:white;
+            margin-bottom:40px;
+            box-shadow:0 5px 15px rgba(0,0,0,0.15);
+        ">
+            <img src="@(!string.IsNullOrEmpty(Model.AvatarPath) ? Model.AvatarPath : "/images/default-avatar.png")"
+                 style="width:150px; height:150px; object-fit:cover; border-radius:50%;
+                 border:5px solid #ffcc00; margin-bottom:15px;" />
+
+            <h2 style="font-weight:700; margin-bottom:8px;">
+                Welcome, @Model.FirstName @Model.LastName 👋
+            </h2>
+            <p style="font-size:16px; opacity:.9;">
+                @Model.Email • @Model.City, @Model.Country
+            </p>
+
+            <a asp-controller="Student" asp-action="EditProfile"
+               style="
+                    background:#ffcc00; color:#002b64; padding:10px 25px;
+                    border-radius:8px; font-weight:700; text-decoration:none;
+               ">
+                ✏ Edit Profile
+            </a>
+        </div>
+
+
+        <!-- PROFILE SUMMARY CARD -->
+        <div style="
+            background:white;
+            padding:30px;
+            border-radius:16px;
+            box-shadow:0 4px 12px rgba(0,0,0,0.08);
+            margin-bottom:35px;
+        ">
+
+            <h3 style="color:#002b64; font-weight:700; margin-bottom:20px;">
+                👤 Profile Summary
+            </h3>
+
+            <div style="display:flex; flex-wrap:wrap; gap:20px;">
+
+                <div style="flex:1; min-width:260px;">
+                    <strong>Full Name:</strong><br />
+                    <span>@Model.FirstName @Model.LastName</span>
+                </div>
+
+                <div style="flex:1; min-width:260px;">
+                    <strong>Email:</strong><br />
+                    <span>@Model.Email</span>
+                </div>
+
+                <div style="flex:1; min-width:260px;">
+                    <strong>Gender:</strong><br />
+                    <span>@Model.Gender</span>
+                </div>
+
+                <div style="flex:1; min-width:260px;">
+                    <strong>Date of Birth:</strong><br />
+                    <span>@(Model.DOB?.ToString("dd-MMM-yyyy") ?? "N/A")</span>
+                </div>
+
+                <div style="flex:1; min-width:260px;">
+                    <strong>Phone:</strong><br />
+                    <span>@Model.PhoneNumber</span>
+                </div>
+
+                <div style="flex:1; min-width:260px;">
+                    <strong>City:</strong><br />
+                    <span>@Model.City</span>
+                </div>
+
+                <div style="flex:1; min-width:260px;">
+                    <strong>State:</strong><br />
+                    <span>@Model.State</span>
+                </div>
+
+                <div style="flex:1; min-width:260px;">
+                    <strong>Country:</strong><br />
+                    <span>@Model.Country</span>
+                </div>
+
+                <div style="flex:1; min-width:260px;">
+                    <strong>Hobbies:</strong><br />
+                    <span>@Model.Hobbies</span>
+                </div>
+
+            </div>
+        </div>
+
+
+        <!-- COURSES CARD -->
+        <div style="
+            background:white;
+            padding:30px;
+            border-radius:16px;
+            box-shadow:0 4px 12px rgba(0,0,0,0.08);
+            margin-bottom:35px;
+        ">
+
+            <h3 style="color:#002b64; font-weight:700; margin-bottom:20px;">
+                📘 My Courses
+            </h3>
+
+            @if (ViewBag.MyCourses != null && ((IEnumerable<dynamic>)ViewBag.MyCourses).Any())
+            {
+                <div style="margin-bottom:20px;">
+                    <ul style="list-style:none; padding:0;">
+
+                        @foreach (var c in (IEnumerable<dynamic>)ViewBag.MyCourses)
+                        {
+                            <li data-courseid="@c.CourseId"
+                                style="
+                                    background:#f5f7fa;
+                                    border:1px solid #dbe1e8;
+                                    margin-bottom:15px;
+                                    padding:15px 20px;
+                                    border-radius:12px;
+                                    display:flex;
+                                    justify-content:space-between;
+                                    align-items:center;
+                                ">
+                                <div>
+                                    <input type="checkbox"
+                                           class="course-check"
+                                           value="@c.CourseId"
+                                           style="margin-right:10px;" />
+                                    <span style="font-size:16px; font-weight:600;">@c.CourseName</span>
+                                </div>
+
+                                <button class="remove-course"
+                                        data-courseid="@c.CourseId"
+                                        style="
+                                            background:#d9534f; border:none; color:white;
+                                            padding:6px 14px; border-radius:6px; cursor:pointer;
+                                        ">
+                                    ✖ Remove
+                                </button>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            }
+            else
+            {
+                <p style="color:#777;">You haven't selected any courses yet.</p>
+            }
+
+            <a asp-controller="Student" asp-action="SelectCourses"
+               style="
+                    background:#002b64; color:white; padding:10px 22px;
+                    text-decoration:none; border-radius:8px; font-weight:600;
+               ">
+                ➕ Add Courses
+            </a>
+
+            <!-- LOGOUT BUTTON -->
+            <div style="text-align:center; margin-top:30px;">
+                <a asp-controller="Student" asp-action="Logout"
+                   style="
+                        background:#28a745; color:white; padding:12px 40px;
+                        text-decoration:none; border-radius:8px; font-weight:700;
+                   ">
+                    🔒 Logout
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+<!-- jQuery + JS logic (same function, no change) -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<script>
+    // Remove single course
+    $(document).on("click", ".remove-course", function () {
+
+        let btn = $(this);
+        let courseId = btn.data("courseid");
+        let row = btn.closest("li");
+
+        Swal.fire({
+            icon: "warning",
+            title: "Remove Course?",
+            text: "This will remove the course from your list.",
+            showCancelButton: true,
+            confirmButtonText: "Yes, remove"
+        }).then((result) => {
+
+            if (!result.isConfirmed) return;
+
+            $.ajax({
+                url: '@Url.Action("DeleteEnrollment", "Student")',
+                type: 'POST',
+                data: { courseId: courseId },
+                success: function (res) {
+                    if (res && res.success) {
+                        row.remove();
+                        Swal.fire("Removed!", "Course removed successfully.", "success");
+                    } else {
+                        Swal.fire("Error", res?.message ?? "Could not remove course.", "error");
+                    }
+                }
+            });
+
+        });
+
+    });
+</script>

@@ -1,0 +1,365 @@
+﻿/* ==============================
+   
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    box-sizing: border-box;
+}
+
+/* ==============================
+   BODY + BACKGROUND
+   ============================== */
+body {
+    background: #ffffff !important;
+    color: #000;
+    font-family: 'Arial',  sans-serif;
+}
+
+/* ==============================
+   GENERAL CONTAINERS
+   ============================== */
+.container,
+.main-container,
+.highlight-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow-x: hidden !important;
+    box-sizing: border-box;
+}
+
+/* ==============================
+   HEADER + LOGO AREA
+   ============================== */
+.slogo {
+    width: 14%;
+    height: 60%;
+    margin-bottom: 15px;
+    padding-left: 15px;
+    background-color: #0a2142;
+}
+
+.bkg {
+    background-image: url("../image/scopeindia-bkg.png");
+    background-repeat: repeat-x;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 200px;
+    width: 100%;
+}
+
+/* ==============================
+   RATING SECTION
+   ============================== */
+.rating {
+    width: 15%;
+    height: 50%;
+    margin: 4% auto 0 auto !important; /* Center horizontally */
+    font-size: 14px;
+    display: block;
+    float: none;
+}
+
+/* ==============================
+   NAVIGATION BAR
+   ============================== */
+.navigate {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px;
+    top: -20px;
+    z-index: 10;
+}
+
+    .navigate .nav-link {
+        text-decoration: none;
+        color: white;
+        padding: 6px 12px;
+        cursor: pointer;
+    }
+
+.nav-link:hover {
+    background-color: rgb(227, 155, 10);
+    color: #ff8400;
+    border: 1px solid #9da5ca;
+    border-radius: 4px;
+}
+
+.nav-link.active {
+    color: rgb(252, 190, 4);
+    border: 1px solid white;
+    border-radius: 4px;
+}
+
+.regi-1 {
+    background-color: rgb(255, 123, 0);
+    border-color: white;
+    color: white !important;
+    border-radius: 2px;
+}
+
+/* ==============================
+   BANNER
+   ============================== */
+.banner {
+    background: rgb(30, 30, 124);
+    color: #eeaf10;
+    text-align: center;
+    font-size: 50px;
+    font-weight: bold;
+    height: 80px;
+    margin-top: -18px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+/* ==============================
+   HEADINGS + CONTENT
+   ============================== */
+hr {
+    background-color: #dcc10bf7 !important;
+    margin-top: 15px !important;
+    height: 5px !important;
+}
+
+.head2 {
+    background-color: white;
+    color: #14267c;
+    text-align: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: normal;
+    font-size: 25px;
+}
+
+.contents {
+    background-color: white;
+    color: #14267c;
+    font-size: 120%;
+    line-height: 1.2;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    height: 150px;
+    font-weight: normal;
+    margin-top: -10px;
+}
+
+/* ==============================
+   LOGO GRID
+   ============================== */
+.logoss {
+    display: grid;
+    gap: 0;
+    grid-template-columns: repeat(8, 1fr);
+    place-items: center;
+    padding: 15px 0 0 0;
+    margin: 0 !important;
+    background: linear-gradient(45deg, #e2e2e2, #fff);
+}
+
+.grid-image-home {
+    height: auto;
+    max-width: 50%;
+}
+
+/* ==============================
+   MAIN CONTENT AREA
+   ============================== */
+.main-container {
+    display: flex;
+    padding: 0;
+    max-width: 100%;
+    margin: 0;
+    height: auto;
+    gap: 12px 30px;
+    box-sizing: border-box;
+}
+
+.left-section {
+    flex: 1;
+    min-width: 0;
+}
+
+    .left-section p {
+        color: white;
+    }
+
+.sec1 {
+    font-size: 50px;
+}
+
+.course-columns {
+    display: flex;
+    gap: 40px;
+}
+
+    .course-columns ul {
+        list-style: none;
+        padding: 0;
+        font-weight: bold;
+        font-size: 20px;
+    }
+
+    .course-columns li {
+        color: white;
+        margin-right: 8px;
+    }
+
+.tick {
+    color: orange;
+    font-size: 1.3em;
+    margin-right: 12px;
+}
+
+.right-section {
+    flex: 3;
+    display: grid;
+    margin-top: 130px;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px 80px;
+    border-radius: 4px;
+}
+
+/* ==============================
+   INFO BOXES
+   ============================== */
+.info-box {
+    background: #14267c;
+    border: solid #f1ad0e 2px;
+    border-radius: 20px 0;
+    padding: 16px 20px;
+    margin: 0;
+    height: 170px;
+    transition: all 0.3s ease;
+    min-width: 200px;
+    color: white;
+}
+
+    .info-box:hover {
+        background: #0a2142;
+        border: solid #f1ad0e 2px;
+        border-radius: 20px 0;
+        transform: scale(1.1);
+        transition-duration: 1s;
+    }
+
+    .info-box h3 {
+        color: #fecb00;
+        border-radius: 20px;
+        margin-bottom: 10px;
+    }
+
+/* ==============================
+   HIGHLIGHT SECTION
+   ============================== */
+.highlight-number {
+    color: #d4af37;
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 8px;
+    margin-top: -3%;
+}
+
+.highlight-text {
+    color: #224391;
+    font-size: 1.5rem;
+    font-weight: 500;
+    text-align: start;
+    position: absolute;
+    margin-top: 3%;
+}
+
+h2 {
+    align-items: center;
+    text-align: start;
+}
+
+.highlight-container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 0 auto !important;
+}
+
+.highlight-card {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.13);
+    padding: 28px 25px;
+    width: 400px;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    flex: 1;
+    margin-top: 2%;
+}
+
+/* ==============================
+   FLOATING SOCIAL BUTTONS
+   ============================== */
+.floating-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: absolute;
+    top: 80px;
+    right: 160px;
+    z-index: 20;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+.float-btn {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 20px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+}
+
+    .float-btn.instagram {
+        background: #E4405F;
+    }
+
+    .float-btn.whatsapp {
+        background: #25D366;
+    }
+
+    .float-btn.call {
+        background: #0b8a00;
+    }
+
+    .float-btn.gallery {
+        background: #007bff;
+    }
+
+    .float-btn:hover {
+        transform: scale(1.15);
+        box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+        color: #fff;
+    }
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .floating-buttons {
+        right: 10px;
+        top: 140px;
+    }
+
+    .float-btn {
+        width: 36px;
+        height: 36px;
+        font-size:  16px;
+            
+    }
+}

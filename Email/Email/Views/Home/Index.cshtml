@@ -1,0 +1,44 @@
+﻿@model eprogram.Models.EmailViewModel
+
+<h2>Send Email</h2>
+
+<form asp-action="Send" method="post">
+
+    <div>
+        <label>From</label>
+        <input asp-for="From" class="form-control" />
+        <span asp-validation-for="From" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label>To</label>
+        <input asp-for="To" class="form-control" />
+        <span asp-validation-for="To" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label>Subject</label>
+        <input asp-for="Subject" class="form-control" />
+        <span asp-validation-for="Subject" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label>Message</label>
+        <textarea asp-for="Message" class="form-control"></textarea>
+        <span asp-validation-for="Message" class="text-danger"></span>
+    </div>
+
+    <br />
+
+    <button type="submit" class="btn btn-primary">Send Email</button>
+
+</form>
+
+@if (ViewBag.Msg != null)
+{
+    <p class="text-success">@ViewBag.Msg</p>
+}
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial"   />
+}

@@ -1,0 +1,155 @@
+﻿@{
+    ViewData["Title"] = "Contact Us";
+}
+
+<div style="
+    display:flex;
+    justify-content:center;
+    padding:50px 0;
+    background:#f5f7fa;
+">
+    <div style="
+        width:85%;
+        max-width:1100px;
+        background:#ffffff;
+        border-radius:18px;
+        padding:40px 50px;
+        box-shadow:0 5px 18px rgba(0,0,0,0.10);
+    ">
+
+        <h2 style="
+            text-align:center;
+            color:#002b64;
+            font-weight:700;
+            font-size:30px;
+            margin-bottom:35px;
+        ">
+            Contact Us
+        </h2>
+
+        <div style="
+            display:flex;
+            gap:40px;
+            flex-wrap:wrap;
+        ">
+
+            <!-- Left Side — Contact Form -->
+            <div style="flex:1; min-width:330px;">
+
+                <!-- Success / Error Alerts -->
+                @if (ViewBag.Success != null)
+                {
+                    <div style="
+                            background:#d4edda;
+                            color:#155724;
+                            padding:12px;
+                            border-radius:8px;
+                            margin-bottom:15px;
+                            text-align:center;
+                        ">
+                        @ViewBag.Success
+                    </div>
+                }
+
+                @if (ViewBag.Error != null)
+                {
+                    <div style="
+                            background:#f8d7da;
+                            color:#721c24;
+                            padding:12px;
+                            border-radius:8px;
+                            margin-bottom:15px;
+                            text-align:center;
+                        ">
+                        @ViewBag.Error
+                    </div>
+                }
+
+                <form asp-controller="Home" asp-action="Contact" method="post">
+
+                    <label style="font-weight:600;">Name</label>
+                    <input type="text" name="Name" required placeholder="Enter your name"
+                           style="width:100%; padding:12px; border:1px solid #ccc; border-radius:8px; font-size:15px; margin-bottom:20px;" />
+
+                    <label style="font-weight:600;">Email</label>
+                    <input type="email" name="Email" required placeholder="Enter your email"
+                           style="width:100%; padding:12px; border:1px solid #ccc; border-radius:8px; font-size:15px; margin-bottom:20px;" />
+
+                    <label style="font-weight:600;">Subject</label>
+                    <input type="text" name="Subject" required placeholder="Enter subject"
+                           style="width:100%; padding:12px; border:1px solid #ccc; border-radius:8px; font-size:15px; margin-bottom:20px;" />
+
+                    <label style="font-weight:600;">Message</label>
+                    <textarea name="Message" required rows="5" placeholder="Type your message..."
+                              style="width:100%; padding:12px; border:1px solid #ccc; border-radius:8px; font-size:15px; margin-bottom:25px;"></textarea>
+
+                    <button type="submit"
+                            style="
+                                width:100%; background:#002b64; color:white;
+                                padding:14px; border:none; border-radius:8px;
+                                font-size:17px; font-weight:600; cursor:pointer;
+                                transition:0.3s;
+                            "
+                            onmouseover="this.style.background='#01408a'"
+                            onmouseout="this.style.background='#002b64'">
+                        Send Message
+                    </button>
+
+                </form>
+            </div>
+
+            <!-- Right Side — Contact Information -->
+            <div style="
+                flex:1; min-width:280px;
+                background:#f0f4fa;
+                padding:30px;
+                border-radius:15px;
+                border-left:6px solid #002b64;
+            ">
+
+                <h3 style="color:#002b64; font-weight:700; margin-bottom:20px;">
+                    Get In Touch
+                </h3>
+
+                <!-- Phone -->
+                <div style="display:flex; margin-bottom:20px;">
+                    <div style="font-size:30px; margin-right:15px; color:#01408a;">📞</div>
+                    <div>
+                        <strong style="color:#002b64;">Call Us</strong><br />
+                        <span style="color:#444;">+91 9876543210</span>
+                    </div>
+                </div>
+
+                <!-- Email -->
+                <div style="display:flex; margin-bottom:20px;">
+                    <div style="font-size:30px; margin-right:15px; color:#01408a;">📧</div>
+                    <div>
+                        <strong style="color:#002b64;">Email</strong><br />
+                        <span style="color:#444;">info@scopeindia.org</span>
+                    </div>
+                </div>
+
+                <!-- Location -->
+                <div style="display:flex; margin-bottom:20px;">
+                    <div style="font-size:30px; margin-right:15px; color:#01408a;">📍</div>
+                    <div>
+                        <strong style="color:#002b64;">Location</strong><br />
+                        <span style="color:#444;">Trivandrum, Kochi, Nagercoil</span>
+                    </div>
+                </div>
+
+                <!-- Website -->
+                <div style="display:flex;">
+                    <div style="font-size:30px; margin-right:15px; color:#01408a;">🌐</div>
+                    <div>
+                        <strong style="color:#002b64;">Website</strong><br />
+                        <span style="color:#444;">www.scopeindia.org</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>

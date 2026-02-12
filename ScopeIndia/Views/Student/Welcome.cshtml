@@ -1,0 +1,120 @@
+﻿@model ScopeIndia.Models.Student
+@{
+    ViewData["Title"] = "Welcome Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div style="display:flex; justify-content:center; align-items:center; min-height:100vh; background-color:#eef2f6; padding:20px;">
+    <div style="background:white; border-radius:18px; width:430px; padding:35px 30px;
+                box-shadow:0 6px 25px rgba(0,0,0,0.12);">
+
+        <!-- Welcome Text -->
+        <h2 style="text-align:center; color:#002b5c; font-weight:700; margin-bottom:15px;">
+            Welcome, @Model.FirstName @Model.LastName 🎉
+        </h2>
+
+        <!-- Avatar + Email + Login Time -->
+        <div style="text-align:center; margin-bottom:25px;">
+            <img src="@(!string.IsNullOrEmpty(Model.AvatarPath) ? Model.AvatarPath : "/images/default-avatar.png")"
+                 alt="Profile Avatar"
+                 style="width:130px; height:130px; border-radius:50%; object-fit:cover;
+                        border:4px solid #002b5c; box-shadow:0 4px 12px rgba(0,0,0,0.15);" />
+
+            <p style="margin-top:15px; color:#333; font-size:15px; line-height:1.7;">
+                📧 <b>@Model.Email</b><br />
+                📅 Login Time: <b>@DateTime.Now.ToString("dd MMM yyyy hh:mm tt")</b>
+            </p>
+        </div>
+
+        <!-- ALERTS -->
+        @if (TempData["Error"] != null)
+        {
+            <div style="background-color:#f8d7da; color:#721c24; padding:10px;
+                            border-radius:8px; text-align:center; margin-bottom:15px;">
+                @TempData["Error"]
+            </div>
+        }
+
+        @if (TempData["Success"] != null)
+        {
+            <div style="background-color:#d4edda; color:#155724; padding:10px;
+                            border-radius:8px; text-align:center; margin-bottom:15px;">
+                @TempData["Success"]
+            </div>
+        }
+
+        <!-- Change Password Form -->
+        <form asp-action="ChangePassword" method="post">
+            <input type="hidden" name="Email" value="@Model.Email" />
+
+            <!-- New Password -->
+            <div style="margin-bottom:18px;">
+                <label style="font-weight:600; color:#002b5c;">New Password</label>
+                <div style="position:relative;">
+                    <input type="password"
+                           id="NewPassword"
+                           name="NewPassword"
+                           placeholder="Enter new password"
+                           style="width:100%; padding:12px; padding-right:40px; margin-top:5px;
+                                  border:1px solid #b8c1cc; border-radius:10px;"
+                           required />
+
+                    <span onclick="togglePassword('NewPassword')"
+                          style="position:absolute; right:12px; top:50%; transform:translateY(-50%);
+                                 cursor:pointer; font-size:19px; color:#555;">
+                        👁
+                    </span>
+                </div>
+            </div>
+
+            <!-- Confirm Password -->
+            <div style="margin-bottom:25px;">
+                <label style="font-weight:600; color:#002b5c;">Confirm Password</label>
+                <div style="position:relative;">
+                    <input type="password"
+                           id="ConfirmPassword"
+                           name="ConfirmPassword"
+                           placeholder="Confirm new password"
+                           style="width:100%; padding:12px; padding-right:40px; margin-top:5px;
+                                  border:1px solid #b8c1cc; border-radius:10px;"
+                           required />
+
+                    <span onclick="togglePassword('ConfirmPassword')"
+                          style="position:absolute; right:12px; top:50%; transform:translateY(-50%);
+                                 cursor:pointer; font-size:19px; color:#555;">
+                        👁
+                    </span>
+                </div>
+            </div>
+
+            <!-- Button -->
+            <button type="submit"
+                    style="width:100%; background-color:#002b5c; color:white; border:none;
+                           padding:13px; border-radius:10px; font-weight:bold; font-size:16px;
+                           cursor:pointer; transition:0.3s;">
+                🔐 Change Password & Login
+            </button>
+        </form>
+
+        <!-- Back to Login -->
+        <div style="text-align:center; margin-top:25px;">
+            <a asp-action="Login" asp-controller="Student"
+               style="color:#002b5c; text-decoration:none; font-weight:600; font-size:15px;">
+                ⬅ Back to Login
+            </a>
+        </div>
+
+    </div>
+</div>
+
+<!-- ALERT AUTO-HIDE -->
+<script>
+    setTimeout(() => {
+        document.querySelectorAll('div[style*="#f8d7da"], div[style*="#d4edda"]').forEach(el => el.style.display = 'none');
+    }, 3000);
+
+    function togglePassword(id) {
+        const field = document.getElementById(id);
+        field.type = field.type === "password" ? "text" : "password";
+    }
+</script>
